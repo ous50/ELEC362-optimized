@@ -1,6 +1,5 @@
 //This code shows the difference between a stringstream and a stream
 
-#include "common.h"
 #include <iostream> 
 #include <string>
 #include <sstream> // This is the String stream library

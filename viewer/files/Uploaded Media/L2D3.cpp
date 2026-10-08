@@ -32,6 +32,6 @@ int main() {
 	newfile << "This is another line.\n";
 	newfile.close();
 
-	system("pause");
-	// pause(); //Replaced the original system("pause"); function so it may theoratically run on any platform
+	// system("pause");
+	pause(); //Replaced the original system("pause"); function so it may theoratically run on any platform
 }
