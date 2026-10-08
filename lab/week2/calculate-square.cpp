@@ -7,36 +7,38 @@
 
 using namespace std;
 
-string getFileName(string inputIndication, string preset) {
-
-    string dataFileName;
-
-    try {
-        string input << cin();
-        if (input.empty()) throw 404;
-        return input;
-    }
-    
-    catch (int errorCode) {
-        switch (errorCode) (
-            case 404:
-                cerr << "You have to input something!";
-                break;
-            default:
-                cerr << "Undefined error occurred!";
-                break;
-            )
-    }
-
-    return "W2_ExerciseData.csv"
+inline bool check_file_existance(const string fileName) {
+    ifstream f(fileName.c_str());
+    return f.good();
 }
 
 
 int main() {
 
-    string dataFileName << getFileName("Please input the name your data file to be processed below:\n", )
+    string dataFileName;
 
-    ifstream exerciseData("W2_ExerciseData.csv");
+    try {
+        cout << "Please input the name your data file to be processed below:\n";
+        cin >> dataFileName;
+        if (dataFileName.empty()) throw 400;
+        if (!check_file_existance(dataFileName)) throw 404;
+    }
+
+    catch (int errorCode) {
+        switch (errorCode) (
+            case 400:
+                cerr << "Bad Request: your input is invalid." << "\n";
+                return errorCode;
+            case 404:
+                cerr << "File Not Found: the file you nominated does not exists." << "\n";
+                return errorCode;
+            default:
+                cerr << "Undefined error occurred" << "\n";
+                return errorCode;
+                )
+    }
+
+    ifstream exerciseData(dataFileName);
     ofstream result("result.csv");
 
     if (!exerciseData || !result) {
@@ -64,8 +66,8 @@ int main() {
             double square = value * value;
 
             result << time << ','
-                   << valueText << ','
-                   << square << '\n';
+                << valueText << ','
+                << square << '\n';
         }
     }
 }
