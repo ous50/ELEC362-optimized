@@ -1,40 +1,95 @@
 # ELEC362-optimized
 
-This repo stores my ELEC362 notes and optimized codes for students not using MSVC toolchain and Windows system.
+My ELEC362 notes and adapted C++ lab code, with setup instructions for students using compilers other than MSVC or operating systems other than Windows.
 
-## Preparartion
-**You dont' need to install any other toolchain if you are using lab computers.**
+This is a personal learning repository. The examples and notes are a work in progress; “optimized” here mainly means making the code easier to work with outside the lab environment, rather than promising better performance.
 
-MSVC toolchain is equipped with Visual Studio IDE, which has been deployed in the lab computers in UoLiv.
+## Preparation
 
->[!WARNING]
->If you are using windows system as a beginner, **it is strongly recommended to use MSVC toolchain and Visual Studio IDE, as per the course recommendation.** 
->However, if you are using Linux or MacOS system, or you are an advanced user who wants to use other toolchains, you can follow the steps below to prepare your environment.
+**If you are using the lab computers, you can use the existing Visual Studio setup. You do not need to install another toolchain.**
 
-### For G++ windows users
+> [!TIP]
+> If you are new to C++ and use Windows, following the course's Visual Studio and MSVC setup will make it easier to follow demonstrations and get help in the lab. The alternatives below are for working on your own computer.
 
+An editor, a compiler, and a shell do different jobs: the editor is where you write code, the compiler builds it, and the shell is where you run commands. Installing an editor alone does not necessarily install a C++ compiler.
 
- It is recommended to use [Mingw-w64](https://www.mingw-w64.org/) as your g++ compiler. You can download the installer from [here](https://sourceforge.net/projects/mingw-w64/files/latest/download). 
+### Windows with GCC / MinGW-w64
 
->[!NOTE]
-> There's another popular choice for g++ windows users, [MSYS2](https://www.msys2.org/), which is a more complete development environment. However, it is not recommended for beginners as it requires more configuration and may cause compatibility issues with some libraries. I would recommend using WSL (Windows Subsystem for Linux) if you want to use MSYS2, as it is more stable and easier to use.
+Choose one of the following routes.
 
-After installation, add the `bin` folder of your Mingw-w64 installation to your system PATH.
+#### If you already use Scoop
 
-If you are using scoop to manage your packages, you can install Mingw-w64 by running the following command in PowerShell:
+Install the [MinGW package](https://github.com/ScoopInstaller/Main/blob/master/bucket/mingw.json) from PowerShell:
 
 ```powershell
 scoop install mingw
 ```
 
+Open a new terminal and check that the compiler is available:
+
 ```powershell
-sudo scoop install -g mingw #if you want to install it globally
+g++ --version
 ```
 
->[!NOTE]
-> - Make sure to restart your terminal after installation to apply the changes to the PATH.
-> - If you are in a network with restricted access, you may need to configure your proxy settings/use a different source (e.g. [ous' scoop-cn bucket](https://github.com/ous50/scoop-cn)) for scoop to work properly.
+A normal per-user installation is enough for these exercises; a global installation is not required. If you do not have Scoop, see the [Scoop installation instructions](https://scoop.sh/) or use MSYS2 below.
 
-### For macOS users
+> [!NOTE]
+> If downloads are blocked on your network, check your proxy settings or package source. My [scoop-cn bucket](https://github.com/ous50/scoop-cn) is another resource for users working with restricted network access.
 
-If you use
+#### Using MSYS2
+
+[MSYS2](https://www.msys2.org/) provides a Windows development environment and a package manager. It does not require WSL.
+
+For an x64 Windows setup, follow the official installer instructions, open **MSYS2 UCRT64**, and install GCC:
+
+```bash
+pacman -S mingw-w64-ucrt-x86_64-gcc
+g++ --version
+```
+
+You can compile and run the exercises in that terminal. To use this compiler from PowerShell instead, add the installation's `ucrt64\bin` directory to your user `PATH` (normally `C:\msys64\ucrt64\bin`) and open a new PowerShell window.
+
+If you already have another GCC installation, check `Get-Command g++` in PowerShell to see which one you are using.
+
+### macOS
+
+Install Apple's Command Line Tools from Terminal:
+
+```bash
+xcode-select --install
+```
+
+Complete the installation dialog, then check the C++ compiler:
+
+```bash
+clang++ --version
+```
+
+You may also use `g++` since it is also supported by apple clang:
+
+```bash
+g++ --version
+```
+
+Use `clang++` for the examples below. You do not need to install the full Xcode IDE for these command-line exercises. See [Apple's installation guide](https://developer.apple.com/documentation/xcode/installing-the-command-line-tools) for details.
+
+### Linux
+
+On Ubuntu or Debian, install GCC and the usual build tools:
+
+```bash
+sudo apt update
+sudo apt install build-essential
+g++ --version
+```
+
+On other distributions, install the C++ compiler through your distribution's package manager. Package names and installation commands may differ.
+
+If you use WSL with Ubuntu, run these commands inside Ubuntu and follow the Linux build instructions below.
+
+## Repository layout
+
+- `lab/week1/` — Week 1 exercises and data.
+- `lab/week2/` — Week 2 exercises, data, and [my notes](lab/week2/note.md).
+- `viewer/` and `index.html` — course-material viewer and its supporting files.
+
