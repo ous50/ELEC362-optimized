@@ -1,0 +1,11 @@
+* text=auto
+* code=auto
+
+*.js   text eol=lf
+*.ts   text eol=lf
+*.tsx  text eol=lf
+*.cpp  text eol=lf
+*.h    text eol=lf
+*.md   text eol=lf
+*.sh   text eol=lf
+*.cpp  code eol=lf
