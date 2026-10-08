@@ -1,4 +1,6 @@
 .vscode/**
-build/**
+.vs/**
+
 *.exe
 *.out
+*.docx#
